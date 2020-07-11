@@ -1,0 +1,41 @@
+﻿@model IList<Student>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+    <div>
+        <h4>viewData -  @ViewData["Hello"]</h4>
+        <h4>viewBag -  @ViewBag.Hello1</h4>
+    </div>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+
+<h3>Student List</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Subject</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Course</td>
+            <td>@item.Subject</td>
+            <td><a href="Home/Details/@item.Id">View</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
