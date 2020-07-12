@@ -1,0 +1,32 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Details";
+    var item = Model;
+}
+
+
+<h3>Student Details Id - @Model.Id</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Subject</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Course</td>
+            <td>@item.Subject</td>
+
+        </tr>
+    </tbody>
+</table>
+
+<a href="~/Student/Index">Back to list</a>
+
+

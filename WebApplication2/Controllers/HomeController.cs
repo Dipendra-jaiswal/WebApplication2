@@ -14,17 +14,13 @@ namespace WebApplication2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IList<Student> students = new List<Student>();
+        private readonly StudentClass objStudent;
+
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-
-            students = new List<Student> { 
-            new Student{ Id = 1, Name ="Ramesh",Course="MCA",Subject="CS" },
-            new Student{ Id = 2, Name ="Suresh",Course="BTECH",Subject="IT" },
-            new Student{ Id = 3, Name ="Rajesh",Course="MCA",Subject="CS" }
-            };
-
+            objStudent = new StudentClass();
         }
 
        

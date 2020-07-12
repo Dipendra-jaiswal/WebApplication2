@@ -1,0 +1,33 @@
+﻿@model IList<Student>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<h3>Student List</h3>
+<a asp-controller="Student" asp-action="Create">Create Student</a>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Subject</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Course</td>
+                <td>@item.Subject</td>
+                <td><a href="Student/Details/@item.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
