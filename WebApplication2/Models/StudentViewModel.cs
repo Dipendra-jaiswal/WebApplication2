@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApplication2.Models
 {
-    public class Student
+    public class StudentViewModel
     {
         public int Id { get; set; }
 
@@ -15,6 +16,6 @@ namespace WebApplication2.Models
 
         public string Subject { get; set; }
 
-        public string Photo { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }

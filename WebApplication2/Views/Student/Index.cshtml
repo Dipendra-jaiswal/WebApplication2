@@ -15,19 +15,26 @@
             <th>Name</th>
             <th>Course</th>
             <th>Subject</th>
+            <th>Photo</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Course</td>
-                <td>@item.Subject</td>
-                <td><a href="Student/Details/@item.Id">View</a></td>
-            </tr>
+            var PhotoPath = "images/" + item.Photo;
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Course</td>
+            <td>@item.Subject</td>
+            <td><img style="width:100px; height:25px;" src="@PhotoPath" /></td>
+            <td>
+                <a href="~/Student/Details/@item.Id">View</a>
+                <a href="~/Student/Edit/@item.Id">Edit</a>
+                <a href="~/Student/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

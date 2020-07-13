@@ -1,0 +1,25 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<form id="form1" method="post" asp-controller="Student" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <input id="Name" asp-for="Name" placeholder="Name" />
+    </div>
+    <div>
+        <input id="Course" asp-for="Course" placeholder="Course" />
+    </div>
+    <div>
+        <input id="Subject" asp-for="Subject" placeholder="Subject" />
+    </div>
+    <div>
+        <button type="submit">Update</button>
+    </div>
+</form>
+
+
+
