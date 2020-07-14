@@ -7,8 +7,8 @@
 
 
 <h3>Student List</h3>
-<a asp-controller="Student" asp-action="Create">Create Student</a>
-<table border="1">
+<a asp-controller="Student" asp-action="Create" class="btn btn-primary">Create Student</a>
+<table class="table table-bordered bg-light">
     <thead>
         <tr>
             <th>Id</th>
@@ -28,11 +28,11 @@
             <td>@item.Name</td>
             <td>@item.Course</td>
             <td>@item.Subject</td>
-            <td><img style="width:100px; height:25px;" src="@PhotoPath" /></td>
+            <td><img style="width:200px; height:100px;" src="@PhotoPath" asp-append-version="true" /></td>
             <td>
-                <a href="~/Student/Details/@item.Id">View</a>
-                <a href="~/Student/Edit/@item.Id">Edit</a>
-                <a href="~/Student/Delete/@item.Id">Delete</a>
+                <a href="~/Student/Details/@item.Id" class="btn btn-primary">View</a>
+                <a href="~/Student/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                <a href="~/Student/Delete/@item.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         }
