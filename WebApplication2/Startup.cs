@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApplication2.Models;
+using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace WebApplication2
 {
@@ -26,10 +28,26 @@ namespace WebApplication2
         {
             services.AddControllersWithViews();
 
+
+            var seriLogger = new LoggerConfiguration()
+                .WriteTo.RollingFile(@"E:\\dipendra.txt")
+                .CreateLogger();
+
+            services.AddLogging(builder => {
+                builder.AddFilter("Microsoft",LogLevel.Debug);
+                builder.AddFilter("System", LogLevel.Error);
+
+                builder.AddSerilog(logger: seriLogger,dispose:true);
+            });
+
+            services.AddSession(option => {
+                option.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
+
             //DI resolve method
             services.AddSingleton<IStudentRepository,MockStudentRepository>();
        }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -39,7 +57,16 @@ namespace WebApplication2
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                 app.UseExceptionHandler("/Error");
+
+                //plaint text with status code and error msg
+                // app.UseStatusCodePages();
+
+                //redirect to other page or error page
+                // app.UseStatusCodePagesWithRedirects("/Error/{0}");
+
+                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -49,6 +76,8 @@ namespace WebApplication2
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

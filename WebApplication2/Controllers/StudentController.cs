@@ -31,7 +31,12 @@ namespace WebApplication2.Controllers
 
         public IActionResult Details(int id)
         {
+           // throw new Exception("Exception globally");
             var stdData = _studentRepository.GetStudent(id);
+            if(stdData == null)
+            {
+                return View("NotFoundId",id);
+            }
             return View(stdData);
         }
 
