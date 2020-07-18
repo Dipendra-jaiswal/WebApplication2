@@ -14,12 +14,19 @@ namespace WebApplication2.Controllers
 {
     public class ErrorController : Controller
     {
+        private readonly ILogger<ErrorController> _logger;
+        public ErrorController(ILogger<ErrorController> logger)
+        {
+            _logger = logger;
+        }
         [Route("Error/{StatusCode}")]
         public IActionResult HttpStatusCodeHandler(int StatusCode)
         {
             var data = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
-           
-            switch(StatusCode){
+            _logger.LogError(LogLevel.Information + " Id does not exist");
+            _logger.LogError(LogLevel.Warning + " Id does not exist");
+
+            switch (StatusCode){
                 case 404: 
                          ViewBag.Message = "Requested page does not exist";
                     ViewBag.Path = data.OriginalPath;
@@ -32,6 +39,7 @@ namespace WebApplication2.Controllers
         [Route("Error")]
         public IActionResult Error()
         {
+            _logger.LogWarning(LogLevel.Warning + " Id does not exist");
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
             ViewBag.ExMessage = exceptionDetails.Error.Message;
             ViewBag.ExStackTrace = exceptionDetails.Error.StackTrace;

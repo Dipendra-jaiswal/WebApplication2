@@ -31,10 +31,13 @@ namespace WebApplication2.Controllers
        
         public IActionResult Index()
         {
+            _logger.LogTrace("Tracing start");
+            _logger.LogInformation("Information start");
             HttpContext.Session.SetString(Name, "Ram");
-            HttpContext.Session.SetInt32(age,32);
-           
+            HttpContext.Session.SetInt32(age,32);           
             HttpContext.Session.Set("Complex", Encoding.ASCII.GetBytes("hello"));
+
+            _logger.LogWarning(LogLevel.Warning + "warning");
 
             var stuList = students;
            // var ddd = students.Where(p => p.Id == 2).First();

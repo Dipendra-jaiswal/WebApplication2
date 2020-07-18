@@ -28,17 +28,17 @@ namespace WebApplication2
         {
             services.AddControllersWithViews();
 
+            //serilog configuration
+            //var seriLogger = new LoggerConfiguration()
+            //    .WriteTo.RollingFile(@"E:\\dipendra.txt")
+            //    .CreateLogger();
 
-            var seriLogger = new LoggerConfiguration()
-                .WriteTo.RollingFile(@"E:\\dipendra.txt")
-                .CreateLogger();
+            //services.AddLogging(builder => {
+            //    builder.AddFilter("Microsoft",LogLevel.Debug);
+            //    builder.AddFilter("System", LogLevel.Error);
 
-            services.AddLogging(builder => {
-                builder.AddFilter("Microsoft",LogLevel.Debug);
-                builder.AddFilter("System", LogLevel.Error);
-
-                builder.AddSerilog(logger: seriLogger,dispose:true);
-            });
+            //    builder.AddSerilog(logger: seriLogger,dispose:true);
+            //});
 
             services.AddSession(option => {
                 option.IdleTimeout = TimeSpan.FromMinutes(20);
