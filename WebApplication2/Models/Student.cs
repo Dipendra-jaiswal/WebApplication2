@@ -16,5 +16,7 @@ namespace WebApplication2.Models
         public string Subject { get; set; }
 
         public string Photo { get; set; }
+
+        public string Address { get; set; }
     }
 }

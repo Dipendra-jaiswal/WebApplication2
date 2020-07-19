@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using WebApplication2.Models;
 using Serilog;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2
 {
@@ -26,6 +27,9 @@ namespace WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppTestContext>(
+                option => option.UseSqlServer(Configuration.GetConnectionString("StudentDBConnection")));
+
             services.AddControllersWithViews();
 
             //serilog configuration
@@ -45,8 +49,11 @@ namespace WebApplication2
             });
 
             //DI resolve method
-            services.AddSingleton<IStudentRepository,MockStudentRepository>();
-       }
+            //services.AddSingleton<IStudentRepository,MockStudentRepository>();
+
+            services.AddScoped<IStudentRepository, SqlStudentRepository>();
+
+        }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
