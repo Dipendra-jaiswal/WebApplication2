@@ -1,12 +1,14 @@
 ﻿@model StudentViewModel
 @{
     ViewData["Title"] = "Edit";
+    var PhotoPath = "~/images/" + Model.ExistingPath;
 }
 
 <h1>Edit</h1>
 
 <form id="form1" method="post" asp-controller="Student" asp-action="Edit" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ExistingPath" />
     <div>
         <input id="Name" asp-for="Name" placeholder="Name" />
     </div>
@@ -17,6 +19,7 @@
         <input id="Subject" asp-for="Subject" placeholder="Subject" />
     </div>
     <div>
+        <div><img style="width:200px; height:100px;" src="@PhotoPath" asp-append-version="true" /></div>
         <div class="col-sm-10">
             <div class="custom-file">
                 <input type="file" asp-for="Photo" class="custom-file-input" placeholder="Photo" />

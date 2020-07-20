@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200720120224_coldd.cs" />
+    <Compile Remove="Migrations\20200720120224_coldd.Designer.cs" />
+    <Compile Remove="Migrations\20200720144253_addColumnAddress.cs" />
+    <Compile Remove="Migrations\20200720144253_addColumnAddress.Designer.cs" />
+    <Compile Remove="Migrations\20200720144355_addColumnPhone.cs" />
+    <Compile Remove="Migrations\20200720144355_addColumnPhone.Designer.cs" />
+    <Compile Remove="Migrations\20200720144555_addColumnPhone.cs" />
+    <Compile Remove="Migrations\20200720144555_addColumnPhone.Designer.cs" />
+    <Compile Remove="Migrations\20200720145605_addColumnAddress.cs" />
+    <Compile Remove="Migrations\20200720145605_addColumnAddress.Designer.cs" />
+    <Compile Remove="Migrations\20200720145835_addColumnAddress.cs" />
+    <Compile Remove="Migrations\20200720145835_addColumnAddress.Designer.cs" />
+    <Compile Remove="Migrations\20200720150240_addColumnAddress.cs" />
+    <Compile Remove="Migrations\20200720150240_addColumnAddress.Designer.cs" />
+    <Compile Remove="Migrations\20200720150511_addColumnAddress.cs" />
+    <Compile Remove="Migrations\20200720150511_addColumnAddress.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">

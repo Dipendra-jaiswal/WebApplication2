@@ -17,5 +17,7 @@ namespace WebApplication2.Models
         public string Subject { get; set; }
 
         public IFormFile Photo { get; set; }
+
+        public string ExistingPath { get; set; }
     }
 }

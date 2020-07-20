@@ -9,8 +9,8 @@ using WebApplication2.Models;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(AppTestContext))]
-    [Migration("20200719153236_Addressmigration2")]
-    partial class Addressmigration2
+    [Migration("20200720143645_seedData")]
+    partial class seedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,6 @@ namespace WebApplication2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Course")
                         .HasColumnType("nvarchar(max)");
 
@@ -45,6 +42,24 @@ namespace WebApplication2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Course = "MCA",
+                            Name = "Sandeep",
+                            Photo = "dan.jpg",
+                            Subject = "IT"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Course = "MCA",
+                            Name = "Sandeep2",
+                            Photo = "tan.jpg",
+                            Subject = "IT"
+                        });
                 });
 #pragma warning restore 612, 618
         }

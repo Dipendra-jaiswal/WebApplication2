@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -62,6 +63,7 @@ namespace WebApplication2.Controllers
                 Name = stdData.Name,
                 Course = stdData.Course,
                 Subject = stdData.Subject,
+                ExistingPath = stdData.Photo,
             };
             return View(student);
         }
@@ -83,7 +85,6 @@ namespace WebApplication2.Controllers
                 newFileName = Guid.NewGuid().ToString() + "_" + studentViewModel.Photo.FileName;
                 string filePath = Path.Combine(uploadFolder, newFileName);
                 studentViewModel.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-
             }
             var student = new Student
             {
@@ -91,7 +92,7 @@ namespace WebApplication2.Controllers
                 Name = studentViewModel.Name,
                 Course = studentViewModel.Course,
                 Subject = studentViewModel.Subject,
-                Photo = newFileName
+                Photo = string.IsNullOrEmpty(newFileName) ? studentViewModel.ExistingPath : newFileName,
             };
 
             return student;
