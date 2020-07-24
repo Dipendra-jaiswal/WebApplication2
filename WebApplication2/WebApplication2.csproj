@@ -21,9 +21,22 @@
     <Compile Remove="Migrations\20200720150240_addColumnAddress.Designer.cs" />
     <Compile Remove="Migrations\20200720150511_addColumnAddress.cs" />
     <Compile Remove="Migrations\20200720150511_addColumnAddress.Designer.cs" />
+    <Compile Remove="Migrations\20200721201231_storedprocedure.cs" />
+    <Compile Remove="Migrations\20200721201231_storedprocedure.Designer.cs" />
+    <Compile Remove="Migrations\20200722093859_addidentity.cs" />
+    <Compile Remove="Migrations\20200722093859_addidentity.Designer.cs" />
+    <Compile Remove="Migrations\20200723143646_addidentity.cs" />
+    <Compile Remove="Migrations\20200723143646_addidentity.Designer.cs" />
+    <Compile Remove="Migrations\20200723144456_addidentity.cs" />
+    <Compile Remove="Migrations\20200723144456_addidentity.Designer.cs" />
+    <Compile Remove="Migrations\20200723144837_addidentity.cs" />
+    <Compile Remove="Migrations\20200723144837_addidentity.Designer.cs" />
+    <Compile Remove="Migrations\20200723145145_addidentity.cs" />
+    <Compile Remove="Migrations\20200723145145_addidentity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">

@@ -6,12 +6,15 @@
 
 <h1>Create</h1>
 <form id="form1" method="post" asp-controller="Student" asp-action="Create" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" value="0" />
     <div>
         <input id="Name" asp-for="Name" placeholder="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div>
         <input id="Course" asp-for="Course" placeholder="Course" />
+        <span asp-validation-for="Course" class="text-danger"></span>
     </div>
     <div>
         <input id="Subject" asp-for="Subject" placeholder="Subject" />
@@ -19,7 +22,7 @@
     <div>
         <div class="col-sm-10">
             <div class="custom-file">
-                <input type="file" asp-for="Photo" class="custom-file-input" placeholder="Photo" />
+                <input type="file" multiple asp-for="Photo" class="custom-file-input" placeholder="Photo" />
                 <label class="custom-file-label">Click here change Photo</label>
             </div>
         </div>
@@ -32,8 +35,16 @@
         <script>
             $(document).ready(function () {
                 $('.custom-file-input').on('change', function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).next('.custom-file-label').html(fileName);
+                    var fileLabel = $(this).next('.custom-file-label');
+                    var files = $(this)[0].files;
+                    if (files.length > 1) {
+                        fileLabel.html(files.length + ' files selected');
+                    }
+                    else if (files.length == 1) {
+                        fileLabel.html(files[0].name);
+                    }
+                  //  var fileName = $(this).val().split("\\").pop();
+                  //  $(this).next('.custom-file-label').html(fileName);
                 });
 
             });

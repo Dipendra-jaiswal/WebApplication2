@@ -9,7 +9,6 @@ namespace WebApplication2.Models
     public class Student
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Course { get; set; }
@@ -18,6 +17,6 @@ namespace WebApplication2.Models
 
         public string Photo { get; set; }
 
-        //public string Address { get; set; } 
+       // public string multipl { get; set; } 
     }
 }

@@ -49,11 +49,15 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult Create(StudentViewModel studentViewModel)
         {
-            var student = GetStudentObject(studentViewModel);
-            _studentRepository.Add(student);
-            return RedirectToAction("Details", new { id = student.Id });
+            if (ModelState.IsValid)
+            {
+                var student = GetStudentObject(studentViewModel);
+                _studentRepository.Add(student);
+                return RedirectToAction("Details", new { id = student.Id });
+            }
+            return View();
          }
-
+        
         public IActionResult Edit(int id)
         {
             var stdData = _studentRepository.GetStudent(id);
@@ -79,12 +83,15 @@ namespace WebApplication2.Controllers
         public Student GetStudentObject(StudentViewModel studentViewModel)
         {
             string newFileName = "";
-            if (studentViewModel.Photo != null)
+            if (studentViewModel.Photo != null && studentViewModel.Photo.Count > 0)
             {
-                string uploadFolder = Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot\\images");
-                newFileName = Guid.NewGuid().ToString() + "_" + studentViewModel.Photo.FileName;
-                string filePath = Path.Combine(uploadFolder, newFileName);
-                studentViewModel.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                foreach (IFormFile photoPath in studentViewModel.Photo)
+                {
+                    string uploadFolder = Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot\\images");
+                    newFileName = Guid.NewGuid().ToString() + "_" + photoPath.FileName;
+                    string filePath = Path.Combine(uploadFolder, newFileName);
+                    photoPath.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
             }
             var student = new Student
             {

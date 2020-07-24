@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Models
@@ -34,13 +35,19 @@ namespace WebApplication2.Models
 
         public IEnumerable<Student> GetAllStudent()
         {
-            return context.Students;
+            //return context.Students.FromSqlRaw<Student>("Select * from students").ToList();
+             return context.Students;
         }
 
         public Student GetStudent(int id)
         {
-            return context.Students.Find(id);
+             return context.Students.Find(id);
+            //var parameter = new SqlParameter("@id", id);
+            // return context.Students.FromSqlRaw<Student>("GetStudentById {0}", id).ToList().FirstOrDefault();
+            //return context.Students.FromSqlRaw<Student>("GetStudentById @id", parameter).ToList().FirstOrDefault();
+            //return context.Students.FromSqlInterpolated<Student>($"GetStudentById {id}").ToList().FirstOrDefault();
         }
+        
 
         public Student Update(Student student)
         {

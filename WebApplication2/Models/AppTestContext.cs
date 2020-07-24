@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication2.Models
 {
-    public class AppTestContext : DbContext
+    public class AppTestContext : IdentityDbContext<CustomIdentityUser>
     {
         public AppTestContext(DbContextOptions<AppTestContext> options) : base(options)
         {
@@ -17,6 +18,7 @@ namespace WebApplication2.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
         }
     }

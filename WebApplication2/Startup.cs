@@ -12,6 +12,7 @@ using WebApplication2.Models;
 using Serilog;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication2
 {
@@ -29,6 +30,8 @@ namespace WebApplication2
         {
             services.AddDbContext<AppTestContext>(
                 option => option.UseSqlServer(Configuration.GetConnectionString("StudentDBConnection")));
+
+            services.AddIdentity<CustomIdentityUser, IdentityRole>().AddEntityFrameworkStores<AppTestContext>();
 
             services.AddControllersWithViews();
 
