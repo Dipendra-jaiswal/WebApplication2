@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -12,21 +14,22 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IHostEnvironment _hostEnvironment;
-
+      
         public StudentController(IStudentRepository studentRepository,IHostEnvironment hostEnvironment)
         {
             _studentRepository = studentRepository;
             _hostEnvironment = hostEnvironment;
         }
-
-
+       
+        [Authorize]
         public IActionResult Index()
         {
-            var stuList = _studentRepository.GetAllStudent();
+             var stuList = _studentRepository.GetAllStudent();
             return View(stuList);
         }
 

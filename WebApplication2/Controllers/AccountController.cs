@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
+using WebApplication2.Models.AccountModel;
 
 namespace WebApplication2.Controllers
 {
@@ -23,7 +27,8 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+       
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -34,7 +39,8 @@ namespace WebApplication2.Controllers
 
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
+                    await signInManager.SignInAsync(user, isPersistent: false);                
+                   
                     return RedirectToAction("Index", "Student");
                 }
 
@@ -45,5 +51,46 @@ namespace WebApplication2.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel model,string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                       // return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Student");
+                    }
+                }
+
+                ModelState.AddModelError("userLogin", $"Invalid Login Attempt.");
+            }
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> Logout(RegisterViewModel model)
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

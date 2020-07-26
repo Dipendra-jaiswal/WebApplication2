@@ -13,6 +13,8 @@ using Serilog;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace WebApplication2
 {
@@ -31,9 +33,42 @@ namespace WebApplication2
             services.AddDbContext<AppTestContext>(
                 option => option.UseSqlServer(Configuration.GetConnectionString("StudentDBConnection")));
 
-            services.AddIdentity<CustomIdentityUser, IdentityRole>().AddEntityFrameworkStores<AppTestContext>();
+            services.AddIdentity<CustomIdentityUser, IdentityRole>(option => {
+                //option.Password.RequiredLength = 4;
+                //option.Password.RequiredUniqueChars = 3;
+                //option.Password.RequireNonAlphanumeric = false;
+                //option.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<AppTestContext>();
 
-            services.AddControllersWithViews();
+            // configure password compexity setting 
+            //services.Configure<IdentityOptions>(option => {
+            //    option.Password.RequiredLength = 4;
+            //    option.Password.RequiredUniqueChars = 3;
+            //    option.Password.RequireNonAlphanumeric = false;
+            //    option.Password.RequireLowercase = false;
+
+            //});
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.LoginPath = "/Account/Login";
+            //    options.Cookie.Name = ".AspNetCore.Identity.Application";
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+            //    options.SlidingExpiration = true;
+            //});
+
+            services.AddControllersWithViews(option =>
+            {
+                //var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                //option.Filters.Add(new AuthorizeFilter(policy));
+
+            });
+
+            services.ConfigureApplicationCookie(option => {
+                option.LoginPath = "/Account/Login";
+                option.Cookie.Name = "AspNetCore.Identity.Application";
+                option.ExpireTimeSpan = TimeSpan.FromMinutes(20);            
+            });
 
             //serilog configuration
             //var seriLogger = new LoggerConfiguration()
@@ -46,6 +81,7 @@ namespace WebApplication2
 
             //    builder.AddSerilog(logger: seriLogger,dispose:true);
             //});
+
 
             services.AddSession(option => {
                 option.IdleTimeout = TimeSpan.FromMinutes(20);
@@ -84,6 +120,8 @@ namespace WebApplication2
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
