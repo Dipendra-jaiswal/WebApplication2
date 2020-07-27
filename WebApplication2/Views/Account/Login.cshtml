@@ -1,11 +1,12 @@
 ﻿@model LoginViewModel
 @{
     ViewData["Title"] = "Login";
+    var returnUrl = @Context.Request.Query["returnurl"];
 }
 
 <h1>Login</h1>
 <div class="row">
-    <form id="form1" method="post" asp-controller="Account" asp-action="Login" enctype="multipart/form-data">
+    <form id="form1" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div>
             <input id="Email" asp-for="UserName" placeholder="Email" />

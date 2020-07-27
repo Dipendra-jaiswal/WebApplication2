@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace WebApplication2.Models.AccountModel
     public class RegisterViewModel
     {
         [Required]
+        [Remote(action: "IsUserNameInUse", controller: "Account")]
         public string UserName { get; set; }
         [Required]
         [EmailAddress]

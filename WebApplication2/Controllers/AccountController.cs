@@ -69,12 +69,18 @@ namespace WebApplication2.Controllers
 
                 if (result.Succeeded)
                 {
+                    bool isValid = true;
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
-                       // return LocalRedirect(returnUrl);
+                        //return LocalRedirect(returnUrl);
                     }
                     else
+                    {
+                        isValid = false;
+                        ModelState.AddModelError("Local Url", $"Invalid Url return.");
+                    }
+                    if(isValid)
                     {
                         return RedirectToAction("Index", "Student");
                     }
@@ -83,6 +89,20 @@ namespace WebApplication2.Controllers
                 ModelState.AddModelError("userLogin", $"Invalid Login Attempt.");
             }
             return View(model);
+        }
+
+        [AcceptVerbs("Get","Post")]
+        public async Task<IActionResult> IsUserNameInUse(string userName)
+        {
+            var user = await userManager.FindByNameAsync(userName);
+            if(user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"UserName {userName} is already in use.");
+            }
         }
 
 
