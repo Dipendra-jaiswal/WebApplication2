@@ -20,6 +20,12 @@ namespace WebApplication2.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
+
+            //apply no action in foreginKey
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 

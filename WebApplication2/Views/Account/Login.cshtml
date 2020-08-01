@@ -9,11 +9,11 @@
     <form id="form1" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div>
-            <input id="Email" asp-for="UserName" placeholder="Email" />
+            <input id="Email" asp-for="UserName" placeholder="Email" value="Admin"/>
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
         <div>
-            <input id="Password" asp-for="Password" placeholder="Password" />
+            <input id="Password" asp-for="Password" placeholder="Password" value="Admin@123" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div>            

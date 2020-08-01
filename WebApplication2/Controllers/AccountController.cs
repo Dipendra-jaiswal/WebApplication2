@@ -39,8 +39,11 @@ namespace WebApplication2.Controllers
 
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);                
-                   
+                    if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("GetUserList", "Admin");
+                    }
+                    await signInManager.SignInAsync(user, isPersistent: false);  
                     return RedirectToAction("Index", "Student");
                 }
 

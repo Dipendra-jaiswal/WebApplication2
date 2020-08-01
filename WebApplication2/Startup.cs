@@ -99,6 +99,7 @@ namespace WebApplication2
         {
             if (env.IsDevelopment())
             {
+                //app.UseExceptionHandler("/Error");
                 app.UseDeveloperExceptionPage();
             }
             else

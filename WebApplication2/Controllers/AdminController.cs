@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
 using WebApplication2.Models.RoleModel;
+using WebApplication2.Models.UserModel;
 
 namespace WebApplication2.Controllers
 {
@@ -19,6 +20,66 @@ namespace WebApplication2.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+
+        #region User
+
+        [HttpGet]
+        public IActionResult GetUserList()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+        public async Task<IActionResult> EditUser(string Id)
+        {
+            var user = await userManager.FindByIdAsync(Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with id = {Id} cannot be found";
+                return View("NotFound");
+            }
+
+            var userClaims = userManager.GetClaimsAsync(user);
+            var userRoles = userManager.GetRolesAsync(user);
+
+            var model = new EditUserViewModel { 
+
+                Id = user.Id, 
+                UserName = user.UserName, 
+                UserProfession = "Software Engineer"            
+            };
+          
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with id = {id} cannot be found";
+                return View("NotFound");
+            }
+
+            var result = await userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("GetUserList", "Admin");
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("userLogin", $"Error occured during user registration.following errors - {error.Code} - {error.Description}");
+            }
+            return RedirectToAction("GetUserList", "Admin");
+
+        }
+
+        #endregion
+
+        #region Roles
+
         public IActionResult GetRoleList()
         {
             var roles = roleManager.Roles;
@@ -194,5 +255,7 @@ namespace WebApplication2.Controllers
             }
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+
+        #endregion
     }
 }

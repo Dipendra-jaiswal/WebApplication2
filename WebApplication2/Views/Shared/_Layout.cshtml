@@ -47,12 +47,12 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="NavBarDropdownlink" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Manage</a>
                                 <div class="dropdown-menu" aria-labelledby="NavBarDropdownlink">
-                                    <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="GetRoleList">Roles</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="GetRoleList">Users</a>
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="GetRoleList">Roles</a>
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="GetUserList">Users</a>
                                 </div>
                             </li>
                         }
-                        </ul>
+                    </ul>
                     <ul>
                         @if (signInManager.IsSignedIn(User))
                         {
@@ -94,12 +94,12 @@
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     </environment>
-    
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-  @*//  @if (IsSectionDefined("Scripts"))
-   // {*@
+    @*//  @if (IsSectionDefined("Scripts"))
+        // {*@
     @RenderSection("Scripts", required: false)
-   @*// }*@
+    @*// }*@
 </body>
 </html>
