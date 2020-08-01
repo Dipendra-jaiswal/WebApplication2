@@ -26,7 +26,7 @@ namespace WebApplication2.Controllers
             _hostEnvironment = hostEnvironment;
         }
        
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
              var stuList = _studentRepository.GetAllStudent();
@@ -43,7 +43,7 @@ namespace WebApplication2.Controllers
             }
             return View(stdData);
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             return View();

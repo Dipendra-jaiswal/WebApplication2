@@ -12,7 +12,7 @@ namespace WebApplication2.Models.AccountModel
     {
         [Required]
         [Remote(action: "IsUserNameInUse", controller: "Account")]
-        [ValidateUserName(allowDomain: "Amit", ErrorMessage = " user name must be Amit")]
+      //  [ValidateUserName(allowDomain: "Amit", ErrorMessage = " user name must be Amit")]
         public string UserName { get; set; }
         [Required]
         [EmailAddress]

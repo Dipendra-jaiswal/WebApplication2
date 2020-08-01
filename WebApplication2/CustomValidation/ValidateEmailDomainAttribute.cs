@@ -17,7 +17,8 @@ namespace WebApplication2.CustomValidation
 
         public override bool IsValid(object value)
         {
-           string[] strArray = value.ToString().Split('@');
+            if (value == null) { return true; }
+             string[] strArray = value.ToString().Split('@');
             return strArray[1].ToUpper() == _allowDomain.ToUpper();
         }
     }
@@ -31,9 +32,9 @@ namespace WebApplication2.CustomValidation
             this._allowDomain = allowDomain;
         }
 
-        public override bool IsValid(object value)
-        {
-            return value.ToString().ToUpper() == _allowDomain.ToUpper();
-        }
+        ////public override bool IsValid(object value)
+        ////{
+        ////    return value.ToString().ToUpper() == _allowDomain.ToUpper();
+        ////}
     }
 }

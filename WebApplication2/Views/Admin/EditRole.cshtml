@@ -4,21 +4,38 @@
 }
 
 <h1>Edit Role</h1>
-<div class="row">
+<div class="card mb-3">
     <form id="form1" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <div>
+        
+        <div class="card-header">
             <input id="RoleId" asp-for="Id" disabled placeholder="RoleId" />
-        </div>
-        <div>
             <input id="RoleName" asp-for="RoleName" placeholder="RoleName" />
             <span asp-validation-for="RoleName" class="text-danger"></span>
         </div>
-        <div>
+        <div class="card-footer">
             <button type="submit" class="btn btn-primary">Update</button>
             <a asp-action="GetRoleList" class="btn btn-primary">Cancel</a>
         </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                @if (Model.Users.Any())
+                {
+                    foreach (var user in Model.Users)
+                    {
+                        <h5>@user</h5>
+                    }
 
+                }
+                else
+                {
+                    <h5>None at the moment</h5>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-action="EditUsersInRole" asp-controller="Admin" asp-route-roleId="@Model.Id" class="btn btn-primary">ManageUserRols</a>
+            </div>
+      </div>
     </form>
 
 </div>

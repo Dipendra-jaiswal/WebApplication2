@@ -77,11 +77,11 @@ namespace WebApplication2.Controllers
                     }
                     else
                     {
-                        isValid = false;
-                        ModelState.AddModelError("Local Url", $"Invalid Url return.");
-                    }
-                    if(isValid)
-                    {
+                    //    isValid = false;
+                    //    ModelState.AddModelError("Local Url", $"Invalid Url return.");
+                    //}
+                    //if(isValid)
+                    //{
                         return RedirectToAction("Index", "Student");
                     }
                 }
