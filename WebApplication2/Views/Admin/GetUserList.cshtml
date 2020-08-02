@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<CustomIdentityUser>
+
+@inject IAuthorizationService authorizationService
+
 @{
     ViewData["Title"] = "Get User List";
 }
@@ -18,7 +21,10 @@
                 </div>
                 <div class="card-footer">
                     <form method="post" asp-action="DeleteUser" asp-route-Id="@user.Id">
-                        <a asp-controller="Admin" asp-action="EditUser" asp-route-Id="@user.Id" class="btn btn-primary">Edit</a>
+                        @if ((await authorizationService.AuthorizeAsync(User, "DeleteRolePolicy")).Succeeded)
+                        {
+                          <a asp-controller="Admin" asp-action="EditUser" asp-route-Id="@user.Id" class="btn btn-primary">Edit</a>
+                        }
 
                         @*<button type="submit" class=" btn btn-danger"
                          onclick="return confirm('Are you sure want to delete role: @role.Name')">Delete</button>*@

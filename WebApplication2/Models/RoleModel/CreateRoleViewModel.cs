@@ -24,7 +24,7 @@ namespace WebApplication2.Models.RoleModel
 
         public List<string> Users { get; set; }
     }
-    public class EditUserRoleViewModel
+    public class EditRoleUserViewModel
     {
         public string UserId { get; set; }
         public string UserName { get; set; }

@@ -26,6 +26,6 @@ namespace WebApplication2.Models.UserModel
         public string UserProfession { get; set; }
 
         public List<string> Claims { get; set; }
-        public List<string> Roles { get; set; }
+        public IList<string> Roles { get; set; }
     }
 }

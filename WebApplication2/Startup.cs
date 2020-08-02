@@ -57,6 +57,10 @@ namespace WebApplication2
             //    options.SlidingExpiration = true;
             //});
 
+            services.AddAuthorization(option => {
+                option.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role"));
+            });
+
             services.AddControllersWithViews(option =>
             {
                 //var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();

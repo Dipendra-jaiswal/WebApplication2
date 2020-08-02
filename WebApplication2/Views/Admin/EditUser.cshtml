@@ -13,6 +13,7 @@
             <input id="UserId" asp-for="Id" disabled placeholder="UserId" />
             <input id="UserName" asp-for="UserName" placeholder="UserName" />
             <span asp-validation-for="UserName" class="text-danger"></span>
+            <input id="Email" asp-for="Email" placeholder="Email" />
             <input id="UserProfession" asp-for="UserProfession" placeholder="UserProfession" />
 
         </div>
@@ -36,7 +37,7 @@
                 }
             </div>
             <div class="card-footer">
-                <a asp-action="" asp-controller="Admin" asp-route-UserId="@Model.Id" class="btn btn-primary">Manage Roles</a>
+                <a asp-action="ManageUserRoles" asp-controller="Admin" asp-route-UserId="@Model.Id" class="btn btn-primary">Manage Roles</a>
             </div>
         </div>
 
@@ -56,7 +57,7 @@
                 }
             </div>
             <div class="card-footer">
-                <a asp-action="" asp-controller="Admin" asp-route-UserId="@Model.Id" class="btn btn-primary">Manage Claims</a>
+                <a asp-action="ManageUserClaims" asp-controller="Admin" asp-route-UserId="@Model.Id" class="btn btn-primary">Manage Claims</a>
             </div>
         </div>
     </form>
